@@ -35,7 +35,7 @@
 - Clone the repository
 
 ```sh
-<!--git clone https://github.com/hnethercutt/hackathon.git
+git clone https://github.com/hnethercutt/hackathon.git
 ```
 
 - Install dependencies
