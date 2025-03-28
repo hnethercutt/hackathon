@@ -1,6 +1,8 @@
 // select ID is "symptom"
 // make symptom element selection required
 
+import { beHelpful } from "./chatBot.mjs";
+
 let symptom = "";
 let responseHistory = [];
 
@@ -42,6 +44,6 @@ function displayResponse(data) {
             responseDiv.appendChild(button);
         });
     } else if (data.message) {
-        responseDiv.innerHTML = `<p><strong>${data.message}</strong></p>`;
+        responseDiv.innerHTML = `<p><strong>${beHelpful(data.message)}</strong></p>`;
     }
 }

@@ -1,9 +1,6 @@
-import OpenAI from "openai";
-
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const client = new OpenAI
 
 const app = express();
 const port = 3000;
@@ -15,30 +12,30 @@ const decisionTrees = {
     headache: {
         question: "Do you drink caffeine daily?", options: ["Yes", "No"], next: {
             "Yes": {question: "Have you had your normal amount of caffeine today?", options: ["Yes", "No"], next: {
-                "No": {message: "Caffeine"},
+                "No": {message: "drink a bit of caffeine"},
                 "Yes": {question: "Have you had enough water today?", options: ["Yes", "No"], next: {
-                    "No": {message: "Dehydration"},
+                    "No": {message: "drink some water"},
                     "Yes": {question: "Are you especially anxious or stressed?", options: ["Yes", "No"], next: {
-                        "Yes": {message: "Stress/anxiety"},
+                        "Yes": {message: "reccomend some activities to reduce stress/anxiety"},
                         "No": {question: "Have you eaten enough today?", options: ["Yes", "No"], next: {
-                            "No": {message: "Hunger"},
+                            "No": {message: "eat some food"},
                             "Yes": {question: "Is it likely that your eyes are strained, or you are otherwise overstimulated?", options: ["Yes", "No"], next: {
-                                "Yes": {message: "Eye strain"},
-                                "No": {message: "Mystery"}
+                                "Yes": {message: "reccomend some activities to reduce eye strain"},
+                                "No": {message: "give some general tips to help with a typical headache"}
                             }}
                         }}
                     }}
                 }}
             }},
             "No": {question: "Have you had enough water today?", options: ["Yes", "No"], next: {
-                "No": {message: "Dehydration"},
+                "No": {message: "drink some water"},
                 "Yes": {question: "Are you especially anxious or stressed?", options: ["Yes", "No"], next: {
-                    "Yes": {message: "Stress/anxiety"},
+                    "Yes": {message: "reccomend some activities to reduce stress/anxiety"},
                     "No": {question: "Have you eaten enough today?", options: ["Yes", "No"], next: {
-                        "No": {message: "Hunger"},
+                        "No": {message: "eat some food"},
                         "Yes": {question: "Is it likely that your eyes are strained, or you are otherwise overstimulated?", options: ["Yes", "No"], next: {
-                            "Yes": {message: "Eye strain"},
-                            "No": {message: "Mystery"}
+                            "Yes": {message: "reccomend some activities to reduce eye strain"},
+                            "No": {message: "give some general tips to help with a typical headache"}
                         }}
                     }}
                 }}
@@ -48,43 +45,40 @@ const decisionTrees = {
     fatigue: {
         question: "Have you gotten at least eight hours of sleep most nights this week?", options: ["Yes", "No"], next: {
             "Yes": {question: "Do you regularly use your phone right before sleeping?", options: ["Yes", "No"], next: {
-                "Yes": {message: "Blue light"},
+                "Yes": {message: "reccomend reducing phone usage before bed or using a blue light filter"},
                 "No": {question: "Do you regularly consume stimulants (caffeine, nicotine) within three hours of sleeping?", options: ["Yes", "No"], next: {
-                    "Yes": {message: "Stimulants"},
+                    "Yes": {message: "consume fewer stimulants before sleeping"},
                     "No": {question: "Are you especially anxious or stressed?", options: ["Yes", "No"], next: {
-                        "Yes": {message: "Stress/anxiety"},
+                        "Yes": {message: "reccomend some activities one can do to reduce stress/anxiety before bed"},
                         "No": {question: "Does your diet largely consist of fast food?", options: ["Yes", "No"], next: {
-                            "Yes": {message: "Poor diet"},
+                            "Yes": {message: "eat a more healthy diet"},
                             "No": {question: "Do you have pre-existing conditions or circunstances that might cause fatigue (depression, burnout, etc.)", options: ["Yes", "No"], next: {
-                                "Yes": {message: "Preexisting conditions."},
-                                "No": {message: "Mystery"}
+                                "Yes": {message: "note that the user may be experiencing issues related to pre-existing conditions and remind them to take care of themselves"},
+                                "No": {message: "give some general tips to reduce overall fatigue"}
                             }}
                         }}
                     }}
                 }}
             }},
-            "No": {message: "Sleep deprivation"}
+            "No": {message: "get better sleep and get more sleep"}
         }
     },
     mood_swings: {
         question: "Have you gotten at least eight hours of sleep most nights this week?", options: ["Yes", "No"], next: {
             "Yes": {question: "Are you especially stressed or anxious, or otherwise in a bad headspace?", options: ["Yes", "No"], next: {
-                "Yes": {message: "Bad headspace"},
+                "Yes": {message: "give some tips for mitigating a bad headspace"},
                 "No": {question: "Do you consume a lot of \"junk food\"?", options: ["Yes", "No"], next: {
-                    "Yes": {message: "Stimulants"},
+                    "Yes": {message: "eat healthier"},
                     "No": {question: "Are you especially anxious or stressed?", options: ["Yes", "No"], next: {
-                        "Yes": {message: "Stress/anxiety"},
-                        "No": {question: "Does your diet largely consist of fast food?", options: ["Yes", "No"], next: {
-                            "Yes": {message: "Poor diet"},
-                            "No": {question: "Are there any external factors in your life that might unknowingly cause irritation or unease?", options: ["Yes", "No"], next: {
-                                "Yes": {message: "External factors."},
-                                "No": {message: "Mystery"}
-                            }}
+                        "Yes": {message: "reccomend some tips to redice general stress/anxiety"},
+                        "No": {question: "Are there any external factors in your life that might unknowingly cause irritation or unease?", options: ["Yes", "No"], next: {
+                            "Yes": {message: "focus on not letting external factors affect one's sense of peace while at home"},
+                            "No": {message: "give some general tips on improving mood swings"}
                         }}
                     }}
                 }}
             }},
-            "No": {message: "Sleep deprivation"}
+            "No": {message: "get better sleep"}
         }
     },
 }
