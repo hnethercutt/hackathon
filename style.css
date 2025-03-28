@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Montserrat;
+  }
+
+.html {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    background-color: #acbff9;
+}
+
+header {
+    height: 75%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background-color: #7593F5;
+    color: #fff;
+}
+
+.title {
+    padding-left: 0.5rem;
+    font-size: 38px;
+}
+
+.nav {
+    display: flex;
+    padding-left: 0.5rem;
+}
+
+.home,
+.resources {
+    padding-left: 1rem;
+    text-decoration: none;
+    color: #fff;
+}
+
+.logo {
+    position: absolute;
+    right: 1rem;
+}
