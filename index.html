@@ -16,24 +16,27 @@
         <body>
             <div class="container">
                 <div class="checker">
-                <h2>Checker</h2>
-                <label for="symptom">Select a symptom:</label>
-                <select id="symptom">
-                    <option value="">Choose an option</option>
-                    <option value="headache">Headache</option>
-                    <option value="fatigue">Fatigue</option>
-                </select>
-                <button onclick="submitSymptom()">Submit</button>
-                <div id="response"></div>
-                </div>
-                <div class="buddy-container">
-                    <img class="buddy-background" src="/images/buddy-background.PNG">
-                    <img class="buddy" src="/images/buddy.png">
+                <h3>What symptom are you worried about?</h3>
+                <h4>Let Hypo-Buddy ease your health anxiety!</h4>
+                <div class="symptom-select">
+                    <label for="symptom">Select a symptom:</label>
+                    <select id="symptom">
+                        <option value="">Choose an option</option>
+                        <option value="headache">Headache</option>
+                        <option value="fatigue">Fatigue</option>
+                    </select>
+                    <button onclick="submitSymptom()">Submit</button>
                 </div>
                 <p class="disclaimer">
                     Disclaimer: This information does not replace professional medical advice. 
                     Always consult a licensed healthcare provider for concerns about your health.
                 </p>
+                </div>
+                <div class="buddy-container">
+                    <img class="buddy-background" src="/images/buddy-background.PNG">
+                    <img class="buddy" src="/images/buddy.png">
+                    <div id="response"></div>
+                </div>
                 <footer>© 2025 Hannah Nethercutt, Garrison Mullen, Hailie Waters</footer>
             </div>
             <script src="script.js"></script>

@@ -25,7 +25,7 @@ body {
 
 #response {
     margin-top: 20px;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 header {
@@ -67,18 +67,33 @@ header {
 
 .checker {
     grid-area: 1 / 1 / 2 / 2;
+    height: 50%;
     padding: 10px;
     background-color: rgb(255, 232, 157, 0.7);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    align-self: center;
 }
 
-h2 {
+h3 {
     text-align: center;
-    padding-bottom: 5px;
+    padding-top: 15px;
+}
+
+h4 {
+    text-align: center;
+    padding: 10px;
 }
 
 #symptom {
     border: none;
+}
+
+#response {
+    width: 300px;
+    position: absolute;
+    padding: 25px;
+    margin-top: 100px;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .buddy-container {
@@ -97,9 +112,15 @@ h2 {
     height: 550px;
 }
 
+.symptom-select {
+    text-align: center;
+    margin: 45px;
+}
+
 .disclaimer {
-    font-weight: 500;
+    font-weight: 600;
     padding: 5px;
+    margin-top: 10%;
 }
 
 footer {
