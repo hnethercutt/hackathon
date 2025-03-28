@@ -1,165 +1,49 @@
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
+// element ID symptom
+// make symptom element selection required
 
-const app = express();
-const port = 3000;
+let symptom = "";
+let responseHistory = [];
 
-app.use(cors());
-app.use(bodyParser.json());
+async function submitSymptom() {
+    symptom = document.getElementById("symptom").value;
+    responseHistory = [];
+    await fetchNextStep();
+}
 
-const decisionTrees = {
-    headache: {
-        question: "Question?",
-        options: ["Yes", "No"],
-        next: {
-            "Yes": { question: "Question?", options: ["Yes", "No"], next: {
-                "Yes": { message: "Message." },
-                "No": { message: "Message." }
-            }},
-            "No": { question: "Question?", options: ["Yes", "No"], next: {
-                "Yes": { message: "Message." },
-                "No": { message: "Message." }
-            }}
-        }
-    },
-    fatigue: {
-        question: "Question?",
-        options: ["Yes", "No"],
-        next: {
-            "Yes": { question: "Question?", options: ["Yes", "No"], next: {
-                "Yes": { message: "Message." },
-                "No": { message: "Message." }
-            }},
-            "No": { question: "Question?", options: ["Yes", "No"], next: {
-                "Yes": { message: "Message." },
-                "No": { message: "Message." }
-            }}
-        }
-    },
-    stomachGIDistress: {
-        question: "Question?",
-        options: ["Yes", "No"],
-        next: {
-            "Yes": { question: "Question?", options: ["Yes", "No"], next: {
-                "Yes": { message: "Message." },
-                "No": { message: "Message." }
-            }},
-            "No": { question: "Question?", options: ["Yes", "No"], next: {
-                "Yes": { message: "Message." },
-                "No": { message: "Message." }
-            }}
-        }
-    },
-    anxietyStress: {
-        question: "Question?",
-        options: ["Yes", "No"],
-        next: {
-            "Yes": { question: "Question?", options: ["Yes", "No"], next: {
-                "Yes": { message: "Message." },
-                "No": { message: "Message." }
-            }},
-            "No": { question: "Question?", options: ["Yes", "No"], next: {
-                "Yes": { message: "Message." },
-                "No": { message: "Message." }
-            }}
-        }
-    },
-    lightheadedness: {
-        question: "Question?",
-        options: ["Yes", "No"],
-        next: {
-            "Yes": { question: "Question?", options: ["Yes", "No"], next: {
-                "Yes": { message: "Message." },
-                "No": { message: "Message." }
-            }},
-            "No": { question: "Question?", options: ["Yes", "No"], next: {
-                "Yes": { message: "Message." },
-                "No": { message: "Message." }
-            }}
-        }
-    },
-    soreThroat: {
-        question: "Question?",
-        options: ["Yes", "No"],
-        next: {
-            "Yes": { question: "Question?", options: ["Yes", "No"], next: {
-                "Yes": { message: "Message." },
-                "No": { message: "Message." }
-            }},
-            "No": { question: "Question?", options: ["Yes", "No"], next: {
-                "Yes": { message: "Message." },
-                "No": { message: "Message." }
-            }}
-        }
-    },
-    cough: {
-        question: "Question?",
-        options: ["Yes", "No"],
-        next: {
-            "Yes": { question: "Question?", options: ["Yes", "No"], next: {
-                "Yes": { message: "Message." },
-                "No": { message: "Message." }
-            }},
-            "No": { question: "Question?", options: ["Yes", "No"], next: {
-                "Yes": { message: "Message." },
-                "No": { message: "Message." }
-            }}
-        }
-    },
-    nausea: {
-        question: "Question?",
-        options: ["Yes", "No"],
-        next: {
-            "Yes": { question: "Question?", options: ["Yes", "No"], next: {
-                "Yes": { message: "Message." },
-                "No": { message: "Message." }
-            }},
-            "No": { question: "Question?", options: ["Yes", "No"], next: {
-                "Yes": { message: "Message." },
-                "No": { message: "Message." }
-            }}
-        }
-    },
-    insomnia: {
-        question: "Question?",
-        options: ["Yes", "No"],
-        next: {
-            "Yes": { question: "Question?", options: ["Yes", "No"], next: {
-                "Yes": { message: "Message." },
-                "No": { message: "Message." }
-            }},
-            "No": { question: "Question?", options: ["Yes", "No"], next: {
-                "Yes": { message: "Message." },
-                "No": { message: "Message." }
-            }}
-        }
+async function fetchNextStep(response = null) {
+    if (response) {
+        responseHistory.push(response);
+    }
+
+    console.log("Sending data to backend:", {symptom, responseHistory}); // Log sent data
+
+    try {
+        const res = await fetch(`http://localhost:3000/api/symptom`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({symptom, responseHistory})
+        });
+
+        const data = await res.json();
+        displayResponse(data);
+    } catch (error) {
+        console.log(error);
     }
 }
 
-function traverseTree(symptom, responses) {
-    node = decisionTrees[symptom];
+function displayResponse(data) {
+    const responseDiv = document.getElementById("response");
+    responseDiv.innerHTML = "";
 
-    for (let response of responses) {
-        if (node.next && node.next[response]) {
-            node = node.next[response];
-        } else {
-            return {message: "Sry there was an error. :("}
-        }
-
-        return node.message ? {message: node.message} : {question: node.question, options: node.options};
+    if (data.question) {
+        responseDiv.innerHTML = `<p>${data.question}</p>`;
+        data.options.forEach(option => {
+            const button = document.createElement("button");
+            button.textContent = option;
+            button.onclick = () => fetchNextStep(option);
+            responseDiv.appendChild(button);
+        });
+    } else if (data.message) {
+        responseDiv.innerHTML = `<p><strong>${data.message}</strong></p>`;
     }
 }
-
-app.post("/api/symptom", (req, res) => {
-    const {symptom, response} = req.body;
-
-    if (!symptom || !desicionTrees[symptom]) {
-        return res.status(400).json({error: "Invalid symptom"});
-    }
-
-    const result = traverseDecisionTree(symptom, responseHistory || []);
-    res.json(result);
-});
-
-app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
