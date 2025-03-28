@@ -1,4 +1,4 @@
-// element ID symptom
+// select ID is "symptom"
 // make symptom element selection required
 
 let symptom = "";
@@ -14,8 +14,6 @@ async function fetchNextStep(response = null) {
     if (response) {
         responseHistory.push(response);
     }
-
-    console.log("Sending data to backend:", {symptom, responseHistory}); // Log sent data
 
     try {
         const res = await fetch(`http://localhost:3000/api/symptom`, {
