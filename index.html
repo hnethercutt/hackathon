@@ -4,27 +4,29 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="style.css" />
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-        </style>
-        <title></title>
+        <link rel="icon" type="image/png" href="/images/logo.png">
+        <title>Hypo-Buddy</title>
+        <header>
+            <a class="title">Hypo-Buddy</a>
+            <nav class="nav">
+                <a class="home" href="index.html">Home</a>
+                <a class="resources" href="resources.html">Resources</a>
+            </nav>
+        </header>
         <body>
-            <header>
-                <a class="title">Title</a>
-                <nav class="nav">
-                    <a class="home" href="index.html">Home</a>
-                    <a class="resources" href="resources.html">Resources</a>
-                </nav>
-                <div class="logo">Logo</div>
-            </header>
-            <h2>Checker</h2>
-            <label for="symptom">Select a symptom:</label>
-            <select id="symptom">
-                <option value="">Choose an option</option>
-                <option value="headache">Headache</option>
-                <option value="fatigue">Fatigue</option>
-            </select>
-            <button onclick="submitSymptom()">Submit</button>
+            <div class="container">
+                <div class="checker">
+                <h2>Checker</h2>
+                <label for="symptom">Select a symptom:</label>
+                <select id="symptom">
+                    <option value="">Choose an option</option>
+                    <option value="headache">Headache</option>
+                    <option value="fatigue">Fatigue</option>
+                </select>
+                <button onclick="submitSymptom()">Submit</button>
+                <div id="response"></div>
+                </div>
+            </div>
             <script src="script.js"></script>
         </body>
     </head>
