@@ -1,4 +1,3 @@
-// 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
 import OpenAI from "openai";
 
 const express = require("express");
