@@ -1,4 +1,4 @@
-import OpenAI from "openai";
+import OpenAI from "./node_modules/openai/core.mjs";
 const client = new OpenAI();
 
 export async function beHelpful(suggestions) {
