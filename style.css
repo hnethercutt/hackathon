@@ -72,20 +72,41 @@ header {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 }
 
+h2 {
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+#symptom {
+    border: none;
+}
+
 .buddy-container {
     grid-area: 1 / 2 / 2 / 3;
     display: flex;
     justify-content: center;
-    background-color: rgb(255, 232, 157, 0.7);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 }
 
 .buddy {
     height: 250px;
-    margin-top: 225px;
+    margin-top: 270px;
     position: absolute;
 }
 
 .buddy-background {
-    height: 500px;
+    height: 550px;
+}
+
+.disclaimer {
+    font-weight: 500;
+    padding: 5px;
+}
+
+footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 40px;
+    text-align: center;
+    font-size: 18px;
 }
