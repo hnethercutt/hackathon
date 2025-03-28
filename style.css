@@ -56,22 +56,28 @@ header {
 }
 
 .container {
-  height: 100%;
-  padding: 75px;
+  min-height: 90svh;
+  padding: 25px;
   display: grid;
-  grid-template-columns: 0.25fr 0.25fr;
-  grid-template-rows: 0.5fr;
+  grid-template-columns: 0.3fr 0.3fr;
+  grid-template-rows: 0.8fr;
+  grid-column-gap: 25px;
   place-content: center;
 }
 
 .checker {
     grid-area: 1 / 1 / 2 / 2;
+    padding: 10px;
+    background-color: rgb(255, 232, 157, 0.7);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 }
 
 .buddy-container {
     grid-area: 1 / 2 / 2 / 3;
     display: flex;
     justify-content: center;
+    background-color: rgb(255, 232, 157, 0.7);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 }
 
 .buddy {
