@@ -56,8 +56,30 @@ header {
 }
 
 .container {
+  height: 100%;
   padding: 75px;
   display: grid;
-  grid-template-columns: 0.5fr 0.5fr;
+  grid-template-columns: 0.25fr 0.25fr;
+  grid-template-rows: 0.5fr;
   place-content: center;
+}
+
+.checker {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.buddy-container {
+    grid-area: 1 / 2 / 2 / 3;
+    display: flex;
+    justify-content: center;
+}
+
+.buddy {
+    height: 250px;
+    margin-top: 225px;
+    position: absolute;
+}
+
+.buddy-background {
+    height: 500px;
 }
